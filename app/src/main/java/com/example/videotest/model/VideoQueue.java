@@ -27,16 +27,12 @@ public class VideoQueue {
         mQueue.add(video);
     }
 
-    public void removeVideo(String video) {
-        mQueue.remove(video);
-        if (mCurrentVideoIndex == mQueue.size()) {
-            mCurrentVideoIndex--;
-        }
-    }
-
     public void removeVideo(int index) {
         mQueue.remove(index);
         if (mCurrentVideoIndex == mQueue.size()) {
+            mCurrentVideoIndex--;
+        }
+        if (mCurrentVideoIndex > index) {
             mCurrentVideoIndex--;
         }
     }

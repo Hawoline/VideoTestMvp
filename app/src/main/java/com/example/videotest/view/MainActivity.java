@@ -2,19 +2,14 @@ package com.example.videotest.view;
 
 import android.app.Activity;
 import android.content.Context;
-import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Environment;
+import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 import android.widget.VideoView;
 import androidx.annotation.NonNull;
-import android.os.Bundle;
 import com.example.videotest.R;
 import com.example.videotest.presenter.MainPresenter;
 import com.example.videotest.presenter.MainPresenterImpl;
-
-import java.io.File;
 
 public class MainActivity extends Activity implements MainView {
     private VideoView mVideoView;

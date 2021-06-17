@@ -10,12 +10,6 @@ public interface MainPresenter {
 
     void onResume();
 
-    void onStart();
-
-    void onStop();
-
-    void onDestroy();
-
     void onSaveInstanceState(Bundle savedInstanceState);
 
     void onRestoreInstanceState(Bundle savedInstanceState);

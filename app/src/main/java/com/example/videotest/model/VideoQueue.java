@@ -17,6 +17,7 @@ public class VideoQueue {
     public String getCurrentVideo() {
         return mQueue.get(mCurrentVideoIndex);
     }
+
     public String nextVideo() {
         mCurrentVideoIndex = ++mCurrentVideoIndex % mQueue.size();
         mCurrentVideoPosition = 0;
@@ -29,10 +30,7 @@ public class VideoQueue {
 
     public void removeVideo(int index) {
         mQueue.remove(index);
-        if (mCurrentVideoIndex == mQueue.size()) {
-            mCurrentVideoIndex--;
-        }
-        if (mCurrentVideoIndex > index) {
+        if (mCurrentVideoIndex == mQueue.size() && mCurrentVideoIndex == index || mCurrentVideoIndex > index) {
             mCurrentVideoIndex--;
         }
     }

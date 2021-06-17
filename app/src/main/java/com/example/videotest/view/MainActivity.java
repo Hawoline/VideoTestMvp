@@ -21,7 +21,7 @@ public class MainActivity extends Activity implements MainView {
         setContentView(R.layout.activity_main);
 
         showViews();
-        mMainPresenter = new MainPresenterImpl(this);
+        mMainPresenter = new MainPresenterImpl();
         mMainPresenter.attachView(this);
         mVideoView.setOnCompletionListener(mMainPresenter.getOnCompletionListener());
         mVideoView.requestFocus(0);

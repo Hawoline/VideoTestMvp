@@ -4,27 +4,27 @@ import java.util.ArrayList;
 import java.util.Queue;
 
 public class VideoQueue {
-    private ArrayList<String> mQueue;
+    private ArrayList<Video> mQueue;
     private int mCurrentVideoIndex;
     private int mCurrentVideoPosition;
 
-    public VideoQueue(ArrayList<String> queue) {
+    public VideoQueue(ArrayList<Video> queue) {
         mQueue = queue;
         mCurrentVideoIndex = 0;
         mCurrentVideoPosition = 0;
     }
 
-    public String getCurrentVideo() {
+    public Video getCurrentVideo() {
         return mQueue.get(mCurrentVideoIndex);
     }
 
-    public String nextVideo() {
+    public Video nextVideo() {
         mCurrentVideoIndex = ++mCurrentVideoIndex % mQueue.size();
         mCurrentVideoPosition = 0;
         return mQueue.get(mCurrentVideoIndex);
     }
 
-    public void addVideo(String video) {
+    public void addVideo(Video video) {
         mQueue.add(video);
     }
 
@@ -35,7 +35,7 @@ public class VideoQueue {
         }
     }
 
-    public void setQueue(ArrayList<String> queue) {
+    public void setQueue(ArrayList<Video> queue) {
         mQueue = queue;
     }
 

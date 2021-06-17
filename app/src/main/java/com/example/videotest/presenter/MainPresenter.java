@@ -8,8 +8,6 @@ public interface MainPresenter {
 
     void onPause();
 
-    void onResume();
-
     void onSaveInstanceState(Bundle savedInstanceState);
 
     void onRestoreInstanceState(Bundle savedInstanceState);
@@ -18,7 +16,11 @@ public interface MainPresenter {
 
     void detachView();
 
-    void startVideo();
+    void playCurrentVideo();
+
+    void playNextVideo();
 
     MediaPlayer.OnCompletionListener getOnCompletionListener();
+
+    String getApiKey();
 }

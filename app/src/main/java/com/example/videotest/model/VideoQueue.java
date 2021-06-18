@@ -35,6 +35,10 @@ public class VideoQueue {
         }
     }
 
+    public void clearQueue() {
+        mQueue.clear();
+    }
+
     public void setQueue(ArrayList<Video> queue) {
         mQueue = queue;
     }

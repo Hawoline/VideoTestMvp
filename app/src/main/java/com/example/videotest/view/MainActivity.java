@@ -23,8 +23,6 @@ public class MainActivity extends YouTubeBaseActivity implements MainView {
     private VideoView mVideoView;
     private MainPresenter mMainPresenter;
     private YouTubePlayerView mYouTubePlayerView;
-    private YouTubePlayer mYouTubePlayer;
-    private YouTubePlayer.OnInitializedListener mOnInitializedListener;
 
     // client id 121743756885-fa9srgdipmo9dl9vjd72pfvrv0hjbfoe.apps.googleusercontent.com
     // api key AIzaSyD33WmIaJ8aIyrqcdLeRJeHMcyNCqBXhKM
@@ -38,85 +36,9 @@ public class MainActivity extends YouTubeBaseActivity implements MainView {
         mMainPresenter.attachView(this);
         mVideoView.setOnCompletionListener(mMainPresenter.getOnCompletionListener());
         mVideoView.requestFocus(0);
-        mOnInitializedListener = new YouTubePlayer.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                youTubePlayer.setPlayerStateChangeListener(new YouTubePlayer.PlayerStateChangeListener() {
-                    @Override
-                    public void onLoading() {
 
-                    }
 
-                    @Override
-                    public void onLoaded(String s) {
-
-                    }
-
-                    @Override
-                    public void onAdStarted() {
-
-                    }
-
-                    @Override
-                    public void onVideoStarted() {
-
-                    }
-
-                    @Override
-                    public void onVideoEnded() {
-                        if (mYouTubePlayerView.getVisibility() == View.VISIBLE) {
-                            mMainPresenter.playNextVideo();
-                        }
-                    }
-
-                    @Override
-                    public void onError(YouTubePlayer.ErrorReason errorReason) {
-
-                    }
-                });
-
-                youTubePlayer.setPlaybackEventListener(new YouTubePlayer.PlaybackEventListener() {
-                    @Override
-                    public void onPlaying() {
-
-                    }
-
-                    @Override
-                    public void onPaused() {
-                        if (mYouTubePlayerView.getVisibility() == View.VISIBLE) {
-                            mMainPresenter.onPause();
-                            mMainPresenter.playCurrentVideo();
-                            youTubePlayer.play();
-                        }
-                    }
-
-                    @Override
-                    public void onStopped() {
-                        int s = 0;
-                    }
-
-                    @Override
-                    public void onBuffering(boolean b) {
-
-                    }
-
-                    @Override
-                    public void onSeekTo(int i) {
-
-                    }
-                });
-                youTubePlayer.setPlayerStyle(PlayerStyle.CHROMELESS);
-                mYouTubePlayer = youTubePlayer;
-                mYouTubePlayer.play();
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-                Toast.makeText(getApplicationContext(), "Video player Failed", Toast.LENGTH_SHORT).show();
-            }
-        };
-
-        mYouTubePlayerView.initialize(mMainPresenter.getApiKey(), mOnInitializedListener);
+        mYouTubePlayerView.initialize(mMainPresenter.getApiKey(), mMainPresenter.getOnInitializedListener());
         mMainPresenter.playCurrentVideo();
     }
 
@@ -131,7 +53,6 @@ public class MainActivity extends YouTubeBaseActivity implements MainView {
         if (mVideoView != null) {
             mMainPresenter.onPause();
             mVideoView.pause();
-            mYouTubePlayer.pause();
             super.onPause();
         }
     }
@@ -148,6 +69,12 @@ public class MainActivity extends YouTubeBaseActivity implements MainView {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         mMainPresenter.onSaveInstanceState(outState);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mMainPresenter.clearData();
     }
 
     @Override
@@ -176,25 +103,18 @@ public class MainActivity extends YouTubeBaseActivity implements MainView {
     }
 
     @Override
-    public void showYoutubeVideo(String video, int videoPosition) {
+    public void showYoutubeVideo() {
         mVideoView.setVisibility(View.GONE);
         mYouTubePlayerView.setVisibility(View.VISIBLE);
-        if (mYouTubePlayer != null) {
-            mYouTubePlayer.loadVideo(video);
-
-            mYouTubePlayer.seekRelativeMillis(videoPosition);
-            mYouTubePlayer.play();
-        }
     }
 
     @Override
     public int getCurrentVideoPosition() {
-        if (mVideoView.getVisibility() == View.VISIBLE) {
-            int currentTimeMillis = mVideoView.getCurrentPosition();
-            return mVideoView.getCurrentPosition();
-        } else {
-            int currentTimeMillis = mYouTubePlayer.getCurrentTimeMillis();
-            return mYouTubePlayer.getCurrentTimeMillis();
-        }
+        return mVideoView.getCurrentPosition();
+    }
+
+    @Override
+    public boolean isYoutubePlayerViewVisible() {
+        return mYouTubePlayerView.getVisibility() == View.VISIBLE;
     }
 }

@@ -3,6 +3,7 @@ package com.example.videotest.presenter;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import com.example.videotest.view.MainView;
+import com.google.android.youtube.player.YouTubePlayer;
 
 public interface MainPresenter {
 
@@ -22,5 +23,9 @@ public interface MainPresenter {
 
     MediaPlayer.OnCompletionListener getOnCompletionListener();
 
+    YouTubePlayer.OnInitializedListener getOnInitializedListener();
+
     String getApiKey();
+
+    void clearData();
 }

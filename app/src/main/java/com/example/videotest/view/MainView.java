@@ -12,7 +12,9 @@ public interface MainView {
 
     void showVideo(String video, int videoPosition);
 
-    void showYoutubeVideo(String video, int videoPosition);
+    void showYoutubeVideo();
 
     int getCurrentVideoPosition();
+
+    boolean isYoutubePlayerViewVisible();
 }

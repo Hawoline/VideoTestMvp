@@ -34,7 +34,7 @@ public class MainPresenterImpl implements MainPresenter {
         mVideoQueue.addVideo(new Video("https://fiverr-res.cloudinary.com/video/upload/t_fiverr_hd/s5axe29abi4fcndxbdoh"));
         mVideoQueue.addVideo(new YoutubeVideo("a3SXHrMOFzA"));
         mVideoQueue.addVideo(new Video("https://fiverr-res.cloudinary.com/video/upload/t_fiverr_hd/eon5hzpvzhmamjdord7c"));
-        mVideoQueue.addVideo(new Video("QBwLH-p4rZU"));
+        mVideoQueue.addVideo(new YoutubeVideo("QBwLH-p4rZU"));
         initVideo();
     }
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">VideoTest</string>
+    <string name="ad_image">Рекламное изображение</string>
 </resources>
